@@ -23,18 +23,19 @@
 #         port: 21
 
 
-name: Deploy via ftp
 on: push
+name: 🚀 Deploy website on push
 jobs:
-  deploy:
-    name: Deploy
+  web-deploy:
+    name: 🎉 Deploy
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Upload ftp
-      uses: genietim/ftp-action
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v4
+
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
-        host: ${{ secrets.FTP_HOST }}
-        user: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        remoteDir: "./laravel/"
+        server: ${{ secrets.FTP_HOST }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.ftp_password }}
