@@ -1,22 +1,12 @@
-name: Deploy to FTP
-
-on:
-  push:
-    branches:
-      - main  # Ajusta la rama que quieres desplegar
-
+name: Deploy to FTP AwardSpace
+run-name: ${{ github.actor }} FTP Deploy
+on: push
 jobs:
   ftp-deploy:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-    - name: Deploy to FTP
-      uses: SamKirkland/FTP-Deploy-Action@4.5.0
-      with:
-        server: ftp://petersoft.atwebpages.com
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./laravel/  # Cambia si necesitas desplegar solo un subdirectorio
+      - uses: Luis97lol/PSFTP@v1.4
+        with:
+          host: ${{ secrets.FTP_HOST }}
+          user: ${{ secrets.FTP_USERNAME }}
+          pass: ${{ secrets.FTP_PASSWORD }}
