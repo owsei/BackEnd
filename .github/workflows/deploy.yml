@@ -1,12 +1,36 @@
+# name: Deploy to FTP AwardSpace
+# run-name: ${{ github.actor }} FTP Deploy
+# on: push
+# jobs:
+#   ftp-deploy:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: Luis97lol/PSFTP@v1.4
+#         with:
+#           host: ${{ secrets.FTP_HOST }}
+#           user: ${{ secrets.FTP_USERNAME }}
+#           pass: ${{ secrets.FTP_PASSWORD }}
+
+
 name: Deploy to FTP AwardSpace
-run-name: ${{ github.actor }} FTP Deploy
-on: push
+on:
+  push:
+    branches:
+      - main
+
 jobs:
   ftp-deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: Luis97lol/PSFTP@v1.4
-        with:
-          host: ${{ secrets.FTP_HOST }}
-          user: ${{ secrets.FTP_USERNAME }}
-          pass: ${{ secrets.FTP_PASSWORD }}
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: FTP Deploy
+      uses: w9jds/ftp-action@v1.0.2
+      with:
+        host: ${{ secrets.FTP_HOST }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        localDir: ./ # Directorio a desplegar
+        remoteDir: /laravel/ # Ruta remota en el servidor
