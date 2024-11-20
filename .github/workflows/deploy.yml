@@ -30,10 +30,10 @@ jobs:
       # so your job can access it
       - name: Checkout
         uses: actions/checkout@v3
-        # with:
+        with:
 
           # Fetch all history for all tags and branches
-        #   fetch-depth: 0
+          fetch-depth: 0
 
           # Checkout a specific branch
         #   ref: test-branch
