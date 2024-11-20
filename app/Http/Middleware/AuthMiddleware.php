@@ -16,7 +16,6 @@ class AuthMiddleware extends Middleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        echo 'With alias';
         return $next($request);
     }
 }
